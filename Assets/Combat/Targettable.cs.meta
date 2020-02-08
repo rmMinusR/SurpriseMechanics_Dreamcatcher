@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 04f505757b3f7e0439c4b9be5313df1a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - renderSpriteTargetted: {fileID: 21300000, guid: acec4d7018e18074b937cab94c5f34cc,
+      type: 3}
+  - renderSpriteUntargetted: {fileID: 21300000, guid: ca348d1646d36064ab99819ecba73d3a,
+      type: 3}
+  - renderTarget: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
