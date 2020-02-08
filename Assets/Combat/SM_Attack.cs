@@ -11,6 +11,7 @@ public class SM_Attack : StateMachineBehaviour
     {
         if (attackPrototype != null)
         {
+            //Instantiate the prototype, parenting and adding the Transforms
             GameObject o = Instantiate(attackPrototype, FindObjectOfType<PlayerCombatController>().attackParent);
             o.transform.rotation = FindObjectOfType<PlayerCombatController>().attackRotation.rotation * o.transform.rotation;
             o.transform.position =  o.transform.right     * attackPrototype.transform.position.x +

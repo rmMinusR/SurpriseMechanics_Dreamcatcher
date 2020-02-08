@@ -8,7 +8,11 @@ public class SM_SetParam : StateMachineBehaviour
     public string[] paramValue;
     public string[] paramTypes;
 
-    private void TrySetVars(Animator animator) {
+    /// <summary>
+    /// Try to set the provided parameters
+    /// </summary>
+    /// <param name="animator"></param>
+    private void TrySetParams(Animator animator) {
         //Debug.Log("Attempting to execute");
         for(int i = 0; i < paramName.Length && i < paramValue.Length && i < paramTypes.Length; i++)
         {
@@ -20,21 +24,21 @@ public class SM_SetParam : StateMachineBehaviour
             else if (paramTypes[i] == "int"   && int  .TryParse(paramValue[i], out i_parsed)) { animator.SetInteger(paramName[i], i_parsed); }
             else if (paramTypes[i] == "float" && float.TryParse(paramValue[i], out f_parsed)) { animator.SetFloat  (paramName[i], f_parsed); }
             else if (paramTypes[i] == "trigger")                                                animator.SetTrigger(paramName[i]);
-            else Debug.Log("Type not recognized: "+paramTypes[i]);
+            else Debug.Log("ERROR: Type not recognized: "+paramTypes[i], this);
         }
-        if (paramName.Length != paramValue.Length || paramValue.Length != paramTypes.Length || paramTypes.Length != paramName.Length) Debug.Log("Parameter data is missing! Please check that names, values, and types are all the same length.", this);
+        if (paramName.Length != paramValue.Length || paramValue.Length != paramTypes.Length || paramTypes.Length != paramName.Length) Debug.Log("ERROR: Parameter data is missing! Please check that names, values, and types are all the same length.", this);
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        TrySetVars(animator);
+        TrySetParams(animator);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        TrySetVars(animator);
+        TrySetParams(animator);
     }
 
     

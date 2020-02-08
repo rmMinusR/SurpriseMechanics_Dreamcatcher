@@ -9,20 +9,7 @@ public class CombatController_bu1 : MonoBehaviour
     public Weapon[] weaponPrototypes;
     public Weapon currentWeapon;
 
-    private int m_selectedWeapon;
-    public int selectedWeapon
-    {
-        get
-        {
-            return m_selectedWeapon;
-        }
-
-        set
-        {
-            m_selectedWeapon = value;
-            //TODO apply weapon prototype
-        }
-    }
+    public int selectedWeapon;
 
     private float screenDiagonal
     {
