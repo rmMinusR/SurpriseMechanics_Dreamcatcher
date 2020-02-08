@@ -7,6 +7,7 @@ public class PlayerCombatController : MonoBehaviour
     public Camera playerCamera;
 
     public Weapon[] weaponPrototypes;
+    public int selectedWeapon = 0;
     [Tooltip("Current weapon object in world")]
     public Weapon currentWeapon;
 
@@ -53,6 +54,10 @@ public class PlayerCombatController : MonoBehaviour
         if(Input.GetButtonDown("Fire1")) TryInputAttack();
     }
 
+    /// <summary>
+    /// Get the entity that the player is currently targetting (cursor). If player is not targetting anything, returns null.
+    /// </summary>
+    /// <returns></returns>
     public Targettable GetTarget()
     {
         Targettable[] possibleTargets = FindObjectsOfType<Targettable>();
@@ -86,6 +91,10 @@ public class PlayerCombatController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Try to send an attack-input signal to the state machine
+    /// </summary>
+    /// <returns></returns>
     public bool TryInputAttack()
     {
         if (currentWeapon == null) return false;
@@ -94,6 +103,9 @@ public class PlayerCombatController : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Try to cancel an attack-input signal
+    /// </summary>
     public bool TryCancelAttack()
     {
         if (currentWeapon == null) return false;
@@ -101,4 +113,42 @@ public class PlayerCombatController : MonoBehaviour
         currentWeapon.GetComponent<Animator>().ResetTrigger("attackInput");
         return true;
     }
+
+    /// <summary>
+    /// Try to swap to a weapon
+    /// </summary>
+    /// <param name="weapon">Weapon index</param>
+    public bool SwapWeapon(int weapon)
+    {
+        //Assert that $weapon is within bounds of array
+        if (weapon >= weaponPrototypes.Length) return false;
+
+        //Destroy the old $currentWeapon, if it exists
+        if (currentWeapon != null) Destroy(currentWeapon.gameObject);
+
+        //Instantiate the new $currentWeapon
+        selectedWeapon = weapon;
+        
+        GameObject o = Instantiate(weaponPrototypes[selectedWeapon].gameObject, transform);
+        o.transform.rotation = weaponPrototypes[selectedWeapon].transform.rotation * o.transform.rotation;
+        o.transform.position =  o.transform.right     * weaponPrototypes[selectedWeapon].transform.position.x +
+                                o.transform.up        * weaponPrototypes[selectedWeapon].transform.position.y +
+                                o.transform.forward   * weaponPrototypes[selectedWeapon].transform.position.z +
+                                transform.position;
+
+        //Link it to the CombatController
+        currentWeapon = o.GetComponent<Weapon>();
+
+        return true;
+    }
+
+    /// <summary>
+    /// Void version of SwapWeapon. Try to swap to a weapon by index.
+    /// </summary>
+    /// <param name="weapon">Weapon index</param>
+    public void v_SwapWeapon(int weapon)
+    {
+        SwapWeapon(weapon);
+    }
+
 }
