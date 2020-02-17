@@ -2564,7 +2564,7 @@ GameObject:
   - component: {fileID: 382042454701581530}
   - component: {fileID: 382042454701581522}
   m_Layer: 0
-  m_Name: AI test A
+  m_Name: Neutral AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

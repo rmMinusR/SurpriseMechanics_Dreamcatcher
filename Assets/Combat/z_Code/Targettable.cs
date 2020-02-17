@@ -66,7 +66,6 @@ public class Targettable : MonoBehaviour
 
         if (knockback > 0 && knockbackSource != null)
         {
-            Debug.Log((transform.position - knockbackSource).normalized * knockback);
             knockbackRigidbody.velocity = ((transform.position-knockbackSource).normalized * knockback);
         }
 

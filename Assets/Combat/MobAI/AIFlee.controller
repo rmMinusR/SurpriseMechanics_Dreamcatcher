@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wanderSpeed: 1
   wanderDistance: 1.5
-  rigidbodyMovementAmplifier: 100
   wanderDelay: 2
   isAnchored: 0
 --- !u!1107 &-9096935117919862110
@@ -42,6 +41,20 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 270, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 7317166502609544408}
+--- !u!114 &-4426593995798600088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc63816e92d9a25449caf83c82b0f852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0.03
+  relativeMotion: {x: 0, y: -1}
 --- !u!1102 &-2751633741653744484
 AnimatorState:
   serializedVersion: 5
@@ -54,7 +67,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2658437451310417032}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -4426593995798600088}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
