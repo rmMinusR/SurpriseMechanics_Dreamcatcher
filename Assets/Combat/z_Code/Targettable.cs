@@ -51,8 +51,25 @@ public class Targettable : MonoBehaviour
     public void DoDamage(float damage)
     {
         DoDamage(damage, 0, Vector3.zero);
+        if(GetComponent<Animator>() != null)
+        {
+            if(HasParameter("seesPlayer", GetComponent<Animator>())) {
+                GetComponent<Animator>().SetBool("seesPlayer", true);
+            }
+        }
     }
-    
+
+    //Thanks to http://answers.unity.com/answers/1030532/view.html
+    public static bool HasParameter(string paramName, Animator animator)
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            if (param.name == paramName)
+                return true;
+        }
+        return false;
+    }
+
     /// <summary>
     /// Deal damage to this entity. Can also deal knockback.
     /// </summary>
